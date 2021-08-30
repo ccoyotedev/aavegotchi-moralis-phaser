@@ -13,6 +13,7 @@ const updateAavegotchis = async (dispatch: React.Dispatch<Action>, owner: string
   try {
     const res = await useSubgraph<AavegotchisOfOwner>(getAllAavegotchisOfOwner(owner));
     dispatch({ type: "SET_USERS_AAVEGOTCHIS", usersAavegotchis: res.aavegotchis });
+    dispatch({ type: "SET_SELECTED_AAVEGOTCHI", selectedAavegotchiId: res.aavegotchis[0]?.id })
   } catch (err) {
     dispatch({
       type: "SET_ERROR",

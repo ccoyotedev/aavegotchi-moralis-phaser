@@ -33,7 +33,10 @@ const BuyButton = () => {
   );
 };
 
-const GotchiSelectButton = ({ gotchi, onClick }: { gotchi: Aavegotchi, onClick: () => void }) => {
+const GotchiSelectButton = ({ gotchi, onClick }: { gotchi?: Aavegotchi, onClick: () => void }) => {
+  if (!gotchi) {
+    return <LoadingButton />
+  }
   return (
     <Button onClick={onClick}>
       <Styled.ButtonContents>
@@ -52,9 +55,8 @@ const GotchiSelectButton = ({ gotchi, onClick }: { gotchi: Aavegotchi, onClick: 
 export const Header = () => {
   const { isAuthenticated } = useMoralis();
   const {
-    state: { usersAavegotchis, networkId, selectedAavegotchiIndex },
+    state: { usersAavegotchis, networkId, selectedAavegotchiId },
   } = useAavegotchi();
-
   const [isGotchiSelectModalOpen, setIsGotchiSelectModalOpen] = useState(false);
 
   return (
@@ -70,7 +72,7 @@ export const Header = () => {
           ) : (
             <GotchiSelectButton
               onClick={() => setIsGotchiSelectModalOpen(true)}
-              gotchi={usersAavegotchis[selectedAavegotchiIndex]}
+              gotchi={usersAavegotchis.find(gotchi => gotchi.id === selectedAavegotchiId)}
             />
           ))}
         <ConnectButton />

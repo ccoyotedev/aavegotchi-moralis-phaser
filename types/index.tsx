@@ -14,3 +14,8 @@ export interface Aavegotchi {
   equippedWearables: Tuple<number, 16>;
   svg?: string;
 }
+
+export interface AavegotchiGameObject extends Aavegotchi {
+  spritesheetKey: string;
+  svg: string;
+}

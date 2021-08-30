@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 const ButtonWrapper = styled.div`
   position: relative;
+  width: 11.8rem;
+  height: 5.3rem;
 
   &:after {
     content: '';
@@ -10,8 +12,8 @@ const ButtonWrapper = styled.div`
     position: absolute;
     top: -3px;
     bottom: -3px;
-    width: 100%;
     left: 0;
+    right: 0;
   }
 
   &:before {
@@ -24,8 +26,8 @@ const ButtonWrapper = styled.div`
   }
 `
 
-const StyledButton = styled.button<{ small?: boolean }>`
-  background-color: ${({ theme }) => theme.colors.secondary};
+const StyledButton = styled.button<{ primary?: boolean }>`
+  background-color: ${({ theme, primary }) => primary ? theme.colors.primary : theme.colors.secondary};
   color: white;
   display: flex;
   align-items: center;
@@ -33,17 +35,17 @@ const StyledButton = styled.button<{ small?: boolean }>`
   position: relative;
   border: none;
   z-index: 1;
-  border-bottom: ${({ theme, small}) => small ? 'none' : `4.5px solid ${theme.colors.secondaryAccent}`};
-  border-right: ${({ theme, small }) => small ? 'none' : `4.5px solid ${theme.colors.secondaryAccent}`};
+  border-bottom: ${({ theme, primary }) => `4.5px solid ${primary ? theme.colors.primaryAccent : theme.colors.secondaryAccent}`};
+  border-right: ${({ theme, primary }) => `4.5px solid ${primary ? theme.colors.primaryAccent : theme.colors.secondaryAccent}`};
   padding: 0.4rem;
-  min-width: ${({small}) => small ? '7.2rem' : '11.8rem'};
-  height: ${({small}) => small ? '1.6rem' : '5.3rem'};
+  width: 100%;
+  height: 100%;
   cursor: pointer;
 
   &:disabled {
     background-color: ${({ theme }) => theme.colors.dark1};
-    border-bottom: ${({ theme, small}) => small ? 'none' : `3px solid ${theme.colors.secondaryAccent}`};
-    border-right: ${({ theme, small}) => small ? 'none' : `3px solid ${theme.colors.secondaryAccent}`};
+    border-bottom: ${({ theme }) => `3px solid ${theme.colors.secondaryAccent}`};
+    border-right: ${({ theme }) => `3px solid ${theme.colors.secondaryAccent}`};
     cursor: auto;
   }
 
@@ -54,19 +56,19 @@ const StyledButton = styled.button<{ small?: boolean }>`
   &:active {
     border-bottom: none;
     border-right: none;
-    border-top: ${({ theme, small}) => small ? `2px solid ${theme.colors.secondaryAccent}` : `4.5px solid ${theme.colors.secondaryAccent}`};
-    border-left: ${({ theme, small }) => small ? `2px solid ${theme.colors.secondaryAccent}` : `4.5px solid ${theme.colors.secondaryAccent}`};
+    border-top: ${({ theme, primary }) => `4.5px solid ${primary ? theme.colors.primaryAccent : theme.colors.secondaryAccent}`};
+    border-left: ${({ theme, primary }) => `4.5px solid ${primary ? theme.colors.primaryAccent : theme.colors.secondaryAccent}`};
   }
 `
 
 interface Props {
   disabled?: boolean;
   onClick?: () => void;
-  small?: boolean;
   children?: React.ReactNode;
+  primary?: boolean;
 }
 
-export const Button = ({ disabled, onClick, small, children }: Props) => {
+export const Button = ({ disabled, onClick, children, primary }: Props) => {
   const handleOnClick = () => {
     if (!disabled && onClick) {
       onClick();
@@ -78,7 +80,7 @@ export const Button = ({ disabled, onClick, small, children }: Props) => {
       <StyledButton
         onClick={handleOnClick}
         disabled={disabled}
-        small={small}
+        primary={primary}
       >
         {children}
       </StyledButton>

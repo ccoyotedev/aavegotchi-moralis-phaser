@@ -9,15 +9,15 @@ interface Props {
 
 export const GotchiSelectModal = ({ onHandleClose }: Props) => {
   const {
-    state: { usersAavegotchis, selectedAavegotchiIndex },
+    state: { usersAavegotchis, selectedAavegotchiId },
     dispatch,
   } = useAavegotchi();
   const [hoverIndex, setHoverIndex] = useState<number | undefined>();
 
-  const handleSelect = (key: number) => {
+  const handleSelect = (id: string) => {
     dispatch({
       type: "SET_SELECTED_AAVEGOTCHI",
-      selectedAavegotchiIndex: key
+      selectedAavegotchiId: id
     })
     onHandleClose();
   }
@@ -29,8 +29,8 @@ export const GotchiSelectModal = ({ onHandleClose }: Props) => {
         {usersAavegotchis?.map((gotchi, i) => (
           <Styled.GotchiCard
             key={gotchi.id}
-            active={i === selectedAavegotchiIndex}
-            onClick={() => handleSelect(i)}
+            active={gotchi.id === selectedAavegotchiId}
+            onClick={() => handleSelect(gotchi.id)}
             onMouseEnter={() => setHoverIndex(i)}
             onMouseLeave={() => setHoverIndex(undefined)}
           >

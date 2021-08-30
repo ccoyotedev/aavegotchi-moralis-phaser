@@ -1,7 +1,9 @@
 import React from 'react';
 import { Layout } from 'components/sections/layout';
 import { styled } from 'theme';
-import { Panel } from 'components/ui';
+import { Panel, Button } from 'components/ui';
+import { useAavegotchi } from 'context/AavegotchiContext';
+import router from 'next/router';
 
 const Grid = styled.section`
   display: grid;
@@ -32,7 +34,16 @@ const Card = styled.a`
   }
 `
 
+const PlayButtonContainer = styled.div`
+  padding-top: 2.4rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`
+
 const Home = () => {
+  const { state: { selectedAavegotchiId }} = useAavegotchi();
+
   return (
     <Layout>
       <Panel>
@@ -57,6 +68,15 @@ const Home = () => {
           </Card>
         </Grid>
       </Panel>
+      <PlayButtonContainer>
+        <Button
+          disabled={!selectedAavegotchiId}
+          primary
+          onClick={() => router.push('/play')}
+        >
+          PLAY
+        </Button>
+      </PlayButtonContainer>
     </Layout>
   )
 }

@@ -213,6 +213,7 @@ export type CustomiseOptions = {
   removeBg?: boolean,
   eyes?: keyof typeof eyes,
   mouth?: keyof typeof mouths,
+  float?: boolean;
   animate?: boolean,
   armsUp?: boolean,
   removeShadow?: boolean;
@@ -239,6 +240,8 @@ export const customiseSvg = (svg: string, options: CustomiseOptions, equipped?: 
           return styledSvg = replaceParts(styledSvg, {target: option, replaceSvg: value as keyof typeof mouths});
         case 'animate':
           return styledSvg = bounceAnimation(styledSvg);
+        case 'float':
+          return styledSvg = addIdleUp(styledSvg);
         case 'armsUp':
           return styledSvg = raiseHands(styledSvg, equipped ? {left: equipped[4], right: equipped[5]} : undefined);
         case 'removeShadow':
