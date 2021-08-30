@@ -1,16 +1,16 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
 export const Portal: React.FC<{}> = ({ children }) => {
-  const el = useRef(document.createElement("div"));
+  const [ container, setContainer ] = useState<HTMLDivElement | null>(null);
 
   useEffect(() => {
-   const portalRoot = document.querySelector("#my-portal") as HTMLElement;
+    const rootContainer = document.createElement('div');
+    const parentElem = document.querySelector('#my-portal');
+    parentElem?.appendChild(rootContainer);
+    setContainer(rootContainer);
+  }, [])
 
-    const current = el.current;
-    portalRoot!.appendChild(current);
-    return () => void portalRoot!.removeChild(current);
-  }, []);
-
-  return createPortal(children, el.current);
+  if (!container) return null;
+  return createPortal(children, container);
 };
