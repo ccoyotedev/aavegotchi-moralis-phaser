@@ -13,7 +13,7 @@ It is written primarily in Typescript and uses [styled components](https://style
 
 Using the [github client](https://cli.github.com/), in your command line run:
 ```
-gh repo create <my-web3-project> --template="https://github.com/aavegotchi/nextjs-moralis-aavegotchi.git"
+gh repo create <my-web3-project> --template="https://github.com/ccoyotedev/aavegotchi-moralis-phaser.git"
 cd <my-web3-project>
 git pull origin main
 yarn install
