@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import * as Styled from "./styles";
 import { useMoralis } from "react-moralis";
-import { Button, GotchiSVG, Modal } from "components/ui";
+import { Button, GotchiSVG } from "components/ui";
 import { GotchiSelectModal, ConnectButton  } from "..";
-import { useAavegotchi, updateAavegotchis } from "context/AavegotchiContext";
+import { useAavegotchi } from "context/AavegotchiContext";
 import { Aavegotchi } from "types";
 
 const LoadingButton = () => {

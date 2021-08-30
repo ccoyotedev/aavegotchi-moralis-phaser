@@ -66,7 +66,6 @@ export const constructSpritesheet = async (spriteMatrix: SpriteMatrix): Promise<
     { src: baseUrl },
     ...spriteImagesArray
   ]);
-  console.log(convertBase64toBlobURL(b64));
   return {
     src: convertBase64toBlobURL(b64),
     dimensions: {

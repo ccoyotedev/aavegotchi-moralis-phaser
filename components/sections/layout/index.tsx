@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Footer, Header } from 'components/sections'
 import { Container } from 'components/layout'
-import { updateNetworkId, useAavegotchi, updateAavegotchis } from 'context/AavegotchiContext'
+import { updateNetworkId, useAavegotchi, updateAavegotchis, updateWithPreviewAavegotchis } from 'context/AavegotchiContext'
 import { useMoralis } from 'react-moralis'
 import { ErrorModal } from 'components/ui'
 import Head from 'next/head'
@@ -15,7 +15,7 @@ interface Props {
 
 export const Layout = ({children, metadetails}: Props) => {
   const { web3, isWeb3Enabled, web3EnableError, enableWeb3, isAuthenticated, user, Moralis, logout  } = useMoralis();
-  const { state: {error} , dispatch } = useAavegotchi();
+  const { state: {error, usersAavegotchis} , dispatch } = useAavegotchi();
 
   const handleCloseErrorModal = () => {
     dispatch({
@@ -23,6 +23,28 @@ export const Layout = ({children, metadetails}: Props) => {
       error: undefined,
     })
   };
+
+  // Fetch preview gotchis if in dev and have no Aavegotchis
+  useEffect(() => {
+    if (usersAavegotchis && usersAavegotchis.length === 0 && process.env.NODE_ENV === "development") {
+      updateWithPreviewAavegotchis(dispatch, web3, [
+        {
+          name: "GotchiDev",
+          id: "OG",
+          collateral: "aWETH",
+          wearables: [117, 55, 0, 0, 0, 0 , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          numericTraits: [50, 50, 50, 50, 40, 40]
+        },
+        {
+          name: "H4cker",
+          id: "l33T",
+          collateral: "aUSDT",
+          wearables: [211, 212, 213, 214, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          numericTraits: [100, 100, 100, 100, 100, 100]
+        }
+      ])
+    }
+  }, [usersAavegotchis])
 
   // Update user aavegotchis
   useEffect(() => {

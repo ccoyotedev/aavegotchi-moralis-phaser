@@ -47,7 +47,6 @@ export class BootScene extends Phaser.Scene {
       "filecomplete",
       (key: string) => {
         // As the spritesheet is the last asset to load in, we can attempt to start the game
-        console.log(key);
         if (key === "PLAYER") {
           this.assetsLoaded = true;
           this.loadingText?.setText(`Connecting to server...`);
