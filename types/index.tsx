@@ -12,10 +12,10 @@ export interface Aavegotchi {
   name: string;
   withSetsNumericTraits: Tuple<number, 6>;
   equippedWearables: Tuple<number, 16>;
-  svg?: string;
+  svg?: Tuple<string, 4>;
 }
 
 export interface AavegotchiGameObject extends Aavegotchi {
   spritesheetKey: string;
-  svg: string;
+  svg: Tuple<string, 4>;
 }

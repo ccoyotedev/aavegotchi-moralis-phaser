@@ -31,9 +31,14 @@ export const Layout = ({children, metadetails}: Props) => {
         {
           name: "GotchiDev",
           id: "OG",
-          collateral: "aWETH",
-          wearables: [117, 55, 0, 0, 0, 0 , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          numericTraits: [50, 50, 50, 50, 40, 40]
+          collateral: "aLINK",
+          wearables: [0, 0, 73, 72, 0, 0 , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          numericTraits: [10, 50, 50, 100, 40, 40]
+        },
+        {
+          name: "Mascot",
+          id: "None",
+          numericTraits: [50, 50, 50, 0, 40, 40]
         },
         {
           name: "H4cker",

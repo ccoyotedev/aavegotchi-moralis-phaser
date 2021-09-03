@@ -13,7 +13,7 @@ const AavegotchiContext = createContext<{
 }>({ state: initialState, dispatch: () => null });
 
 interface GotchiOptions {
-  haunt?: "0" | "1",
+  haunt?: "1" | "2",
   numericTraits?: Tuple<number, 6>,
   wearables?: Tuple<number, 16>,
   collateral?: Collaterals,
@@ -26,10 +26,10 @@ export const updateWithPreviewAavegotchis = async (dispatch: React.Dispatch<Acti
     const gotchis = await Promise.all(options.map(async (option) => {
       const withSetsNumericTraits: Tuple<number, 6> = option.numericTraits || [50, 50, 50, 50, 50, 50];
       const equippedWearables: Tuple<number, 16> = option.wearables || [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-      const svg = await useDiamondCall<string>(web3, {
-        name: "previewAavegotchi",
+      const svg = await useDiamondCall<Tuple<string, 4>>(web3, {
+        name: "previewSideAavegotchi",
         parameters: [
-          option?.haunt || "0",
+          option?.haunt || "1",
           option?.collateral ? collateralToAddress[option.collateral] : collateralToAddress["aWETH"],
           withSetsNumericTraits,
           equippedWearables,

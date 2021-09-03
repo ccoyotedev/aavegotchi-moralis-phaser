@@ -7,7 +7,15 @@ type DiamondCallMethods =
   | {
       name: "previewAavegotchi";
       parameters: [string, string, Tuple<number, 6>, Tuple<number, 16>];
-    };
+    }
+  | {
+      name: "getAavegotchiSideSvgs";
+      parameters: [string]
+    }
+  | {
+      name: "previewSideAavegotchi";
+      parameters: [string, string, Tuple<number, 6>, Tuple<number, 16>];
+    }
 
 export const useDiamondCall = async <R extends unknown>(
   web3: any,
