@@ -4,7 +4,7 @@ import { IonPhaser, GameInstance } from "@ion-phaser/react";
 import { useAavegotchi } from "context/AavegotchiContext";
 import { useRouter } from 'next/router'
 import Scenes from "game/scenes";
-import { Aavegotchi } from "types";
+import { Aavegotchi, Tuple } from "types";
 import { useDiamondCall } from "actions/web3";
 import { useMoralis } from "react-moralis";
 
@@ -29,7 +29,7 @@ const Main = () => {
     if (!selectedGotchi.svg) {
       try {
         if (!web3) throw "Not connected to web3";
-        const svg = await useDiamondCall<string>(web3, {name: "getAavegotchiSvg", parameters: [selectedGotchi.id]});
+        const svg = await useDiamondCall<Tuple<string, 4>>(web3, {name: "getAavegotchiSideSvgs", parameters: [selectedGotchi.id]});
         selectedGotchi.svg = svg;
       } catch (err) {
         console.error(err);
